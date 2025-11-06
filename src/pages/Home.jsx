@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ValueProps from '../components/ValueProps'
+import FeaturedServices from '../components/FeaturedServices'
 
 export default function Home(){
   return (
@@ -38,6 +39,9 @@ export default function Home(){
 
       {/* Value proposition section below the hero */}
       <ValueProps />
+
+      {/* Featured services */}
+      <FeaturedServices />
     </>
   )
 }

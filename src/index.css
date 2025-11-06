@@ -179,15 +179,41 @@ body{
 .badge.new{background:linear-gradient(90deg,var(--accent),#06b6d4);color:#041025;font-weight:700}
 
 /* Value propositions section */
-.value-props{position:relative;z-index:60;padding:84px 0 96px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)}
+.value-props{position:relative;z-index:0;padding:84px 0 96px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)}
 .value-props-inner{max-width:1440px;margin:0 auto;padding:20px 28px}
 .value-props h2{text-align:center;font-size:2rem;margin:0 0 30px;color:var(--white);font-weight:800;letter-spacing:0.2px}
 .value-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;align-items:start}
 .value-card{background:linear-gradient(180deg, rgba(8,12,20,0.96), rgba(4,8,14,0.96));border:1px solid rgba(255,255,255,0.035);padding:16px;border-radius:12px;display:flex;flex-direction:column;gap:10px;transition:transform .22s cubic-bezier(.2,.9,.3,1),box-shadow .22s cubic-bezier(.2,.9,.3,1);backface-visibility:hidden;overflow:visible;min-height:0}
 .value-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 22px 52px rgba(2,6,23,0.5)}
 
+/* Featured Services */
+.featured-services{padding:72px 0;background:transparent}
+.featured-inner{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;flex-direction:column;align-items:center}
+.featured-services h2{text-align:center;font-size:1.9rem;margin-bottom:26px;color:var(--white);font-weight:800}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;width:100%}
+.service-card{background:linear-gradient(180deg, rgba(8,12,20,0.98), rgba(2,4,10,0.98));border:1px solid rgba(255,255,255,0.03);padding:18px;border-radius:12px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;min-height:160px}
+.service-icon{width:48px;height:48px;border-radius:10px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:6px}
+.service-card h3{margin:0;font-size:1.05rem}
+.service-body{margin:0;color:var(--muted);font-size:0.95rem;line-height:1.45}
+.service-actions{margin-top:auto}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:700}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--white)}
+.btn-primary{background:linear-gradient(90deg,var(--accent),#06b6d4);color:#041025}
+.services-footer{margin-top:22px}
+
+@media (max-width:720px){
+  .service-card{min-height:0;padding:14px}
+}
+
+/* Divider between sections */
+.section-divider{width:100%;height:18px;margin-bottom:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:6px}
+
+/* Decorative panel behind service cards (safe: inside featured section) */
+.featured-panel{position:absolute;left:50%;top:30px;transform:translateX(-50%);width:100%;max-width:1320px;height:calc(100% - 60px);background:linear-gradient(180deg, rgba(3,8,20,0.24), rgba(3,8,20,0.12));border-radius:14px;padding:12px;pointer-events:none;z-index:0}
+.featured-inner{position:relative;z-index:2}
+
 /* subtle mask at the bottom to hide underlying page seams on some viewports */
-.value-props::after{content:'';position:absolute;left:0;right:0;bottom:0;height:56px;background:linear-gradient(180deg, rgba(6,10,20,0), var(--brand-bg) 70%);pointer-events:none;z-index:1}
+.value-props::after{display:none}
 
 /* centered panel behind the value cards to improve contrast on wide screens */
 /* Decorative centered panel removed; kept value-props-inner stacking context */
