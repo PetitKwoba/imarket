@@ -42,8 +42,21 @@ body{
 .nav-links a{color:rgba(255,255,255,0.92);text-decoration:none;padding:8px 14px;border-radius:8px;transition:all .16s;font-weight:600;font-size:0.98rem}
 .nav-links a.active{color:var(--accent);font-weight:800}
 .nav-links a:hover{color:var(--white);background:rgba(255,255,255,0.06);transform:translateY(-1px)}
-.cta{background:linear-gradient(90deg,var(--accent),#06b6d4);padding:8px 14px;border-radius:10px;color:white;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(79,70,229,0.18)}
-.cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(79,70,229,0.22)}
+.cta{background:linear-gradient(90deg,var(--accent),#06b6d4);padding:8px 14px;border-radius:10px;color:white;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(79,70,229,0.18);transition:transform .22s cubic-bezier(.2,.9,.3,1),box-shadow .22s cubic-bezier(.2,.9,.3,1),filter .18s;transform-origin:center;will-change:transform,box-shadow;display:inline-flex;align-items:center;gap:10px;cursor:pointer}
+.cta:hover,.cta:focus{transform:translateY(-4px) scale(1.02);box-shadow:0 18px 36px rgba(79,70,229,0.22);outline:none}
+.cta:focus-visible{outline:3px solid rgba(6,182,212,0.12);outline-offset:4px}
+
+/* CTA entrance animation (subtle fade + lift) and stagger */
+@keyframes cta-entrance{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.hero-ctas .cta{opacity:0;animation:cta-entrance .6s cubic-bezier(.2,.9,.3,1) both;animation-delay:var(--cta-delay,0s)}
+.hero-ctas .cta:nth-child(1){--cta-delay:0.12s}
+.hero-ctas .cta:nth-child(2){--cta-delay:0.22s}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .hero-ctas .cta{animation:none !important}
+  .cta{transition:none !important;transform:none !important}
+}
 
 /* Modern submenu for Services */
 .nav-links .has-sub{position:relative}
@@ -141,7 +154,7 @@ body{
   .nav-links .mobile-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;height:56px;border-bottom:1px solid rgba(255,255,255,0.03);margin-bottom:10px}
   .nav-links .mobile-brand{display:flex;align-items:center;gap:10px}
   .brand-logo.mobile{width:52px;height:52px;object-fit:contain;border-radius:8px}
-  .logo.mobile-mark{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),#06b6d4);color:#041025;font-weight:800}
+  /* logo.mobile-mark removed (not used) */
   .mobile-close{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--white);width:44px;height:44px;padding:0;border-radius:12px;display:inline-flex;align-items:center;justify-content:center}
   .mobile-close svg{display:block}
 
@@ -164,3 +177,55 @@ body{
 /* Badges and small icons */
 .badge{display:inline-block;font-size:11px;padding:4px 6px;border-radius:999px;background:rgba(255,255,255,0.06);color:var(--white);margin-left:8px}
 .badge.new{background:linear-gradient(90deg,var(--accent),#06b6d4);color:#041025;font-weight:700}
+
+/* Value propositions section */
+.value-props{position:relative;z-index:60;padding:84px 0 96px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)}
+.value-props-inner{max-width:1440px;margin:0 auto;padding:20px 28px}
+.value-props h2{text-align:center;font-size:2rem;margin:0 0 30px;color:var(--white);font-weight:800;letter-spacing:0.2px}
+.value-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;align-items:start}
+.value-card{background:linear-gradient(180deg, rgba(8,12,20,0.96), rgba(4,8,14,0.96));border:1px solid rgba(255,255,255,0.035);padding:16px;border-radius:12px;display:flex;flex-direction:column;gap:10px;transition:transform .22s cubic-bezier(.2,.9,.3,1),box-shadow .22s cubic-bezier(.2,.9,.3,1);backface-visibility:hidden;overflow:visible;min-height:0}
+.value-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 22px 52px rgba(2,6,23,0.5)}
+
+/* subtle mask at the bottom to hide underlying page seams on some viewports */
+.value-props::after{content:'';position:absolute;left:0;right:0;bottom:0;height:56px;background:linear-gradient(180deg, rgba(6,10,20,0), var(--brand-bg) 70%);pointer-events:none;z-index:1}
+
+/* centered panel behind the value cards to improve contrast on wide screens */
+/* Decorative centered panel removed; kept value-props-inner stacking context */
+.value-props-inner{position:relative;z-index:2}
+.value-icon{width:48px;height:48px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
+.value-card h3{margin:0;font-size:1.05rem}
+.value-card p{margin:0;color:var(--muted);font-size:0.95rem;line-height:1.5}
+
+/* prevent very long paragraph wrapping by allowing a slightly narrower measure on wide cards */
+.value-card .value-body{max-width:44ch}
+
+/* make card content area slimmer for a sleeker look */
+.value-card .value-icon + h3{margin-top:4px}
+.value-card .value-icon{margin-bottom:6px}
+
+/* On very wide screens, give the center panel a bit more inset so cards aren't edge-to-edge */
+@media (min-width:1400px){
+  .value-props-inner{padding-left:44px;padding-right:44px}
+  /* value-props-panel max-width removed (panel not rendered) */
+}
+
+/* entrance animation for the cards */
+@keyframes card-entrance{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.value-card{opacity:0;animation:card-entrance .6s cubic-bezier(.2,.9,.3,1) both}
+.value-card:nth-child(1){animation-delay:0.08s}
+.value-card:nth-child(2){animation-delay:0.16s}
+.value-card:nth-child(3){animation-delay:0.24s}
+.value-card:nth-child(4){animation-delay:0.32s}
+
+@media (max-width:1000px){
+  .value-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:720px){
+  .value-grid{grid-template-columns:1fr;gap:12px}
+  .value-props{padding:36px 12px}
+  .value-props h2{font-size:1.25rem}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .value-card{animation:none !important;transition:none !important}
+}
