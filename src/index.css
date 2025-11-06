@@ -1,0 +1,159 @@
+:root{
+  /* Brand colors (will be updated after sampling logo.png) */
+  --brand-bg: #0f2b82; /* sampled or fallback deep blue */
+  --card:#0b1220;
+  --accent:#06b6d4; /* cyan accent */
+  --muted:#94a3b8;
+  --white:#f8fafc;
+  /* layout */
+  --nav-height:64px;
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+.body{
+  margin:0;
+}
+body{
+  margin:0;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, var(--brand-bg), #071029);
+  color: var(--white);
+}
+.container{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:center}
+
+/* Nav */
+.nav-wrap{backdrop-filter: blur(6px);}
+/* When the mobile menu is open we temporarily disable the backdrop-filter on the header
+  because filters create a containing block that prevents fixed children from anchoring
+  to the viewport. Disabling it while the menu is open lets the fixed menu fill the
+  full viewport. */
+.nav-wrap.menu-open{backdrop-filter:none}
+.nav{height:var(--nav-height);display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:8px}
+.brand-logo{width:44px;height:44px;object-fit:contain;margin-right:8px}
+.logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;color:white}
+/* Hide the text mark when the real logo image is loaded */
+.brand.has-logo .logo{display:none}
+.brand.has-logo .brand-text{display:none}
+.brand-text{font-weight:700;font-size:1.1rem}
+.hamburger{display:none} /* hide by default on large screens */
+.nav-links{list-style:none;display:flex;gap:22px;margin:0;padding:0;align-items:center}
+.nav-links a{color:rgba(255,255,255,0.92);text-decoration:none;padding:8px 14px;border-radius:8px;transition:all .16s;font-weight:600;font-size:0.98rem}
+.nav-links a.active{color:var(--accent);font-weight:800}
+.nav-links a:hover{color:var(--white);background:rgba(255,255,255,0.06);transform:translateY(-1px)}
+.cta{background:linear-gradient(90deg,var(--accent),#06b6d4);padding:8px 14px;border-radius:10px;color:white;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(79,70,229,0.18)}
+.cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(79,70,229,0.22)}
+
+/* Modern submenu for Services */
+.nav-links .has-sub{position:relative}
+.nav-links .has-sub > a,
+.nav-links .has-sub > .services-toggle{display:inline-flex;align-items:center;gap:8px;background:transparent;border:0;color:inherit;font:inherit;padding:8px;border-radius:8px}
+.nav-links .has-sub > a::after,
+.nav-links .has-sub > .services-toggle::after{content:'▾';font-size:12px;opacity:0.9;margin-left:6px}
+.nav-links .submenu{position:absolute;top:calc(100% + 10px);left:0;min-width:220px;background:linear-gradient(180deg,var(--card), rgba(11,17,30,0.95));padding:10px;border-radius:10px;box-shadow:0 12px 30px rgba(2,6,23,0.6);display:flex;flex-direction:column;gap:6px;opacity:0;transform:translateY(6px);visibility:hidden;transition:opacity .18s ease,transform .18s ease,visibility .18s}
+.nav-links .submenu a{padding:8px 10px;border-radius:8px;color:var(--white);display:flex;align-items:center;gap:10px}
+.nav-links .submenu a svg{opacity:0.9}
+.nav-links .submenu a:hover{background:rgba(255,255,255,0.03);transform:none}
+.nav-links .has-sub:hover > .submenu{opacity:1;transform:translateY(0);visibility:visible}
+
+/* Submenu arrow indicator */
+.nav-links .has-sub > a::after{content:'▾';font-size:12px;opacity:0.9;margin-left:6px}
+
+/* Mobile: show submenu in the collapsed vertical menu when opened */
+@media (max-width:720px){
+  /* On mobile the submenu should look like part of the menu panel and share the same dark surface */
+  .nav-links .submenu{position:static;display:none;padding:10px;background:linear-gradient(180deg,var(--card), rgba(11,17,30,0.95));box-shadow:0 8px 18px rgba(2,6,23,0.5);border-radius:10px;opacity:1;transform:none;visibility:visible;margin:8px 0}
+  .nav-links.open .has-sub.open > .submenu{display:flex}
+  .nav-links.open .has-sub > a::after,
+  .nav-links.open .has-sub > .services-toggle::after{content:'▸'}
+  .nav-links{flex-direction:column;gap:0;padding:12px}
+  .nav-links li{width:100%}
+  .nav-links a{padding:12px 10px}
+}
+
+/* Hero */
+.hero{padding:80px 0}
+.hero-inner{max-width:880px;margin:0 auto;text-align:center}
+.hero h1{font-size:clamp(28px,4vw,44px);margin:0 0 12px}
+.hero p{color:var(--muted);font-size:1.05rem;margin:0}
+
+/* Homepage hero section styles */
+.hero-section{position:relative;display:flex;align-items:center;justify-content:center;padding:0;border-radius:0;overflow:hidden;height:calc(100vh - var(--nav-height));min-height:520px;width:100vw;margin-left:calc(50% - 50vw)}
+.hero-section .hero-media{position:absolute;inset:0;overflow:hidden}
+.hero-section .hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(4,8,20,0.55), rgba(4,8,20,0.65));pointer-events:none}
+.hero-section .hero-media .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:translateZ(0);filter:brightness(0.6);}
+.hero-section .hero-content{position:relative;z-index:2;max-width:900px;padding:40px 18px;text-align:left;display:flex;flex-direction:column;justify-content:center;height:100%}
+.hero-section h1{font-size:clamp(28px,4.6vw,48px);line-height:1.03;margin:0 0 12px}
+.hero-section .hero-sub{color:var(--muted);font-size:1.05rem;margin-bottom:20px}
+.hero-ctas{display:flex;gap:12px;align-items:center}
+.cta.primary{background:linear-gradient(90deg,var(--accent),#06b6d4);color:#041025;padding:12px 18px;border-radius:10px;font-weight:700}
+.cta.secondary{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--white);padding:10px 16px;border-radius:10px}
+
+/* Make hero content centered on small screens */
+@media (max-width:720px){
+  .hero-section{padding:28px 12px}
+  .hero-section .hero-content{text-align:center}
+  .hero-ctas{justify-content:center;flex-direction:column}
+  .cta.primary,.cta.secondary{width:100%;display:inline-flex;justify-content:center}
+}
+
+/* Responsive */
+@media (max-width:720px){
+  .nav-links{display:none}
+  .cta{padding:8px 10px}
+  .hamburger{display:inline-flex;background:transparent;border:0;color:var(--muted);align-items:center;justify-content:center;padding:6px;border-radius:8px}
+  .hamburger svg{display:block}
+  .hamburger:focus{outline:2px solid rgba(79,70,229,0.25);outline-offset:2px}
+
+  .hamburger.is-open{color:var(--white)}
+
+  /* Mobile menu overlay */
+  /* Mobile menu panel with visible, slightly translucent dark background (match submenu feel) */
+  /* Mobile panel: make wider and use almost full width; ensure it sits above page content */
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;gap:12px;padding:18px;padding-top:22px;background:linear-gradient(180deg,#041025,#03101b);border-radius:0;box-shadow:0 24px 64px rgba(2,6,23,0.95);z-index:9999;border:0;overflow-y:auto;max-height:100vh;width:100%;max-width:100%}
+  /* Top-level links are transparent so the panel surface shows through */
+  .nav-links.open a{font-size:1.06rem;padding:12px 16px;border-radius:10px;color:var(--white);font-weight:700;background:transparent;min-height:44px;display:flex;align-items:center}
+  .nav-links.open a:hover{background:rgba(255,255,255,0.04)}
+
+  /* Make each link look like a small card inside the panel for clarity */
+  .nav-links.open a{background:transparent}
+  .nav-links.open li > a, .nav-links.open li > button, .nav-links.open li > .services-toggle{display:block}
+  .nav-links.open li{border-radius:8px}
+
+  /* make menu items spaced and distinct */
+  .nav-links.open li{padding:8px 6px}
+  .nav-links.open li > a{padding:14px 16px;border-radius:12px}
+
+  /* focus styles for keyboard users */
+  .nav-links a:focus{outline:2px solid rgba(6,182,212,0.18);outline-offset:4px;border-radius:8px}
+
+  /* Ensure nested submenu scrolls inside the panel instead of overflowing */
+  .nav-links.open .submenu{max-height:calc(100vh - 220px);overflow:auto}
+
+  /* Mobile header inside panel */
+  .nav-links .mobile-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;height:56px;border-bottom:1px solid rgba(255,255,255,0.03);margin-bottom:10px}
+  .nav-links .mobile-brand{display:flex;align-items:center;gap:10px}
+  .brand-logo.mobile{width:40px;height:40px;object-fit:contain;border-radius:8px}
+  .logo.mobile-mark{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),#06b6d4);color:#041025;font-weight:800}
+  .mobile-close{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--white);width:44px;height:44px;padding:0;border-radius:12px;display:inline-flex;align-items:center;justify-content:center}
+  .mobile-close svg{display:block}
+
+  /* On very narrow screens, reduce side inset to maximize width */
+  @media (max-width:420px){
+    .nav-links.open{left:6px;right:6px;border-radius:10px}
+    .brand-logo.mobile{width:40px;height:40px}
+  }
+
+  /* backdrop dims the page when the menu is open */
+  .menu-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);backdrop-filter:blur(4px);opacity:0;visibility:hidden;transition:opacity .18s ease;z-index:9990}
+  .menu-backdrop.show{opacity:1;visibility:visible}
+
+  /* When mobile menu is hidden, keep hamburger visible and hide desktop links */
+  .nav-links{display:none}
+  .nav .cta{display:none}
+  .nav .brand{gap:8px}
+}
+
+/* Badges and small icons */
+.badge{display:inline-block;font-size:11px;padding:4px 6px;border-radius:999px;background:rgba(255,255,255,0.06);color:var(--white);margin-left:8px}
+.badge.new{background:linear-gradient(90deg,var(--accent),#06b6d4);color:#041025;font-weight:700}
