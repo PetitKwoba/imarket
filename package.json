@@ -13,6 +13,10 @@
     "react-router-dom": "^6.14.1"
   },
   "devDependencies": {
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 5f3482d364f9b6c930f4db3bf526a734dab40ffe
     "vite": "^7.2.1"
   }
 }
