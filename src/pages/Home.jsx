@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ValueProps from '../components/ValueProps'
 import FeaturedServices from '../components/FeaturedServices'
+import WhyChooseUs from '../components/WhyChooseUs'
 
 export default function Home(){
   return (
@@ -42,6 +43,9 @@ export default function Home(){
 
       {/* Featured services */}
       <FeaturedServices />
+
+      {/* Why choose us */}
+      <WhyChooseUs />
     </>
   )
 }
