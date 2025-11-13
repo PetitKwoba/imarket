@@ -59,20 +59,54 @@ export default function WhyChooseUs(){
   return (
     <section className="why-choose" aria-labelledby="why-choose-title">
       <div className="container">
-        <div className="why-inner">
-          <h2 id="why-choose-title">What Sets Us Apart</h2>
-          <p className="why-intro">Practical, measurable, and human-centered services that help your business scale faster and more efficiently.</p>
+        <div className="why-inner why-split">
+          <div className="why-left">
+            <h2 id="why-choose-title">What Sets Us Apart</h2>
+            <p className="why-intro">Practical, measurable, and human-centered services that help your business scale faster and more efficiently.</p>
+            <p className="why-lead">We combine experienced teams, data-driven processes and transparent reporting to deliver outcomes that matter — growth, efficiency and clear ROI.</p>
 
-          <div className="why-grid">
-            {features.map((f, i) => (
-              <article key={f.key} className="why-card" tabIndex={0} style={{animationDelay: `${i * 80}ms`}}>
-                <div className="why-icon">{icons[f.key]}</div>
-                <div className="why-body">
-                  <strong className="why-title">{f.title}</strong>
-                  <p className="why-desc">{f.desc}</p>
-                </div>
-              </article>
-            ))}
+            <div className="why-stats" role="list" aria-hidden="false">
+              <div className="stat" role="listitem">
+                <strong className="num">120+</strong>
+                <span className="label">Businesses Served</span>
+              </div>
+              <div className="stat" role="listitem">
+                <strong className="num">98%</strong>
+                <span className="label">Satisfaction</span>
+              </div>
+              <div className="stat" role="listitem">
+                <strong className="num">Avg. 4.8</strong>
+                <span className="label">Client Rating</span>
+              </div>
+            </div>
+
+            <div className="why-cta-wrap">
+              <a className="cta primary" href="/services">Explore Services</a>
+              <a className="cta secondary" href="/contact">Talk to Us</a>
+            </div>
+            <div className="why-cta-note">No-obligation consultation · Clear timelines · Transparent pricing</div>
+          </div>
+
+          <div className="why-right">
+            <div className="why-grid">
+              {features.map((f, i) => (
+                <article
+                  key={f.key}
+                  className="why-card"
+                  tabIndex={0}
+                  role="group"
+                  aria-labelledby={`${f.key}-title`}
+                  aria-describedby={`${f.key}-desc`}
+                  style={{animationDelay: `${i * 80}ms`}}
+                >
+                  <div className="why-icon" aria-hidden>{icons[f.key]}</div>
+                  <div className="why-body">
+                    <strong id={`${f.key}-title`} className="why-title">{f.title}</strong>
+                    <p id={`${f.key}-desc`} className="why-desc">{f.desc}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </div>
