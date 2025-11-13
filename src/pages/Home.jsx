@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ValueProps from '../components/ValueProps'
 import FeaturedServices from '../components/FeaturedServices'
+import CTASection from '../components/CTASection'
 import WhyChooseUs from '../components/WhyChooseUs'
 
 export default function Home(){
@@ -41,11 +42,14 @@ export default function Home(){
       {/* Value proposition section below the hero */}
       <ValueProps />
 
-      {/* Featured services */}
-      <FeaturedServices />
+  {/* Featured services */}
+  <FeaturedServices />
 
-      {/* Why choose us */}
-      <WhyChooseUs />
+    {/* Why choose us */}
+    <WhyChooseUs />
+
+    {/* Call to action (moved below WhyChooseUs) */}
+    <CTASection />
     </>
   )
 }
